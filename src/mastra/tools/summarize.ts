@@ -5,7 +5,7 @@ import { generateText } from "../lib/llm";
 export const summarizeTool = createTool({
   id: "summarize",
   description:
-    "stravaExploreのすべての結果からdistanceMとelevDiffMの条件に近いひとつのセグメントを選ぶ",
+    "stravaExploreのすべての結果からdistanceMとelevMの条件に近いひとつのセグメントを選ぶ",
   inputSchema: z.object({
     results: z.array(
       z.object({

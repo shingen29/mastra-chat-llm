@@ -12,7 +12,16 @@ export const tileBoundsTool = createTool({
   outputSchema: z.array(z.array(z.number()).length(4)),
   execute: async ({ context }) => {
     const { bounds, rows, cols } = context;
-    const [S, W, N, E] = bounds;
+    let [S, W, N, E] = bounds;
+
+    // 緯度経度の逆転をチェックして修正
+    if (S > N) {
+      [S, N] = [N, S]; // 南北を入れ替え
+    }
+    if (W > E) {
+      [W, E] = [E, W]; // 東西を入れ替え
+    }
+
     const dLat = (N - S) / rows,
       dLng = (E - W) / cols;
     const tiles: [number, number, number, number][] = [];

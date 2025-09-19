@@ -24,7 +24,26 @@ export const stravaExploreTool = createTool({
   }),
   outputSchema: z.array(ExplorerSegment),
   execute: async ({ context }) => {
-    const { bounds } = context;
+    let { bounds } = context;
+
+    // 緯度経度の逆転をチェックして修正
+    // bounds = [南, 西, 北, 東] の想定
+    let [val1, val2, val3, val4] = bounds;
+
+    // 値の範囲から緯度経度を判定
+    // 緯度: -90 to 90, 経度: -180 to 180
+    // 日本周辺では緯度: 24-46, 経度: 122-154 程度
+    if (Math.abs(val1) > 90 || Math.abs(val3) > 90) {
+      // 最初の値が緯度範囲外なら、経度緯度が逆転している
+      bounds = [val2, val1, val4, val3]; // [緯度1, 経度1, 緯度2, 経度2] に修正
+    }
+
+    // さらに南北・東西の順序をチェック
+    let [S, W, N, E] = bounds;
+    if (S > N) [S, N] = [N, S]; // 南北入れ替え
+    if (W > E) [W, E] = [E, W]; // 東西入れ替え
+    bounds = [S, W, N, E];
+
     const token = process.env.STRAVA_ACCESS_TOKEN?.trim();
     if (!token) {
       const p = path.join(process.cwd(), "mock/explorer.sample.json");
