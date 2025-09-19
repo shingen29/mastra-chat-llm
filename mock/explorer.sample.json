@@ -1,0 +1,31 @@
+{
+  "segments": [
+    {
+      "id": 229781,
+      "name": "Sample Climb",
+      "distance": 2684.8,
+      "elev_difference": 152.8,
+      "avg_grade": 5.7,
+      "climb_category": 4,
+      "points": "_p~iF~ps|U_ulLnnqC_mqNvxq`@"
+    },
+    {
+      "id": 345123,
+      "name": "Mountain Ridge Trail",
+      "distance": 5200.0,
+      "elev_difference": 280.5,
+      "avg_grade": 5.4,
+      "climb_category": 3,
+      "points": "abcdefghijklmnop"
+    },
+    {
+      "id": 567890,
+      "name": "Coastal Route",
+      "distance": 8500.0,
+      "elev_difference": 95.2,
+      "avg_grade": 1.1,
+      "climb_category": 0,
+      "points": "qrstuvwxyz123456"
+    }
+  ]
+}
